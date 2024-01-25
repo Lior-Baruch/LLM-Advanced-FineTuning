@@ -1,73 +1,46 @@
-# README for Llama-2-7b Fine-Tuning Project
+# Repository Overview
+This repository contains three Jupyter notebooks, each focusing on advanced techniques for fine-tuning large language models (LLMs). The notebooks demonstrate the use of LoRA, quantization, SFT (Supervised Fine-Tuning), and DPO (Direct Policy Optimization) on LLaMA and Mistral 7B models. These methods aim to enhance model performance by incorporating human preference data and efficient fine-tuning strategies.
 
-## Overview
+## Notebooks
 
-This project is focused on fine-tuning the Llama-2-7b model, a powerful language model by Meta AI, using a unique dataset and advanced techniques like LoRA (Low-Rank Adaptation) and BitsAndBytes for efficient training and quantization. The project aims to adapt the model to better handle chat-like conversational data, making it more suitable for real-world conversational AI applications.
+### 1. FineTune_llama
+- **Objective**: Fine-tuning the LLaMA-2-7B model using LoRA and quantization techniques.
+- **Key Features**:
+  - **Model Loading**: Loading the LLaMA-2-7B model with quantization configurations for memory efficiency.
+  - **LoRA Adapters**: Adding and configuring LoRA adapters for efficient fine-tuning.
+  - **SFTTrainer**: Utilizing a custom `SFTTrainer` for supervised fine-tuning.
+  - **Training Setup**: Setting up training arguments, including batch size, learning rate, optimizer, and scheduler.
+  - **Model Testing**: Comparing the base model with the fine-tuned model to illustrate the effects of fine-tuning.
+- **Libraries Used**: `transformers`, `datasets`, `bitsandbytes`, `trl`, `accelerate`, `wandb`.
 
-## Dependencies
+### 2. Fine_tune_Mistral_7b_with_DPO
+- **Objective**: Fine-tuning the Mistral 7B model using DPO with human preference data.
+- **Key Features**:
+  - **Data Formatting**: Custom function for formatting the dataset for DPO.
+  - **LoRA Configuration**: Configuring LoRA parameters for the Mistral 7B model.
+  - **DPO Training**: Setting up and executing DPO training with the specified dataset.
+  - **Inference Testing**: Testing the model's inference capabilities post fine-tuning.
+- **Libraries Used**: `datasets`, `trl`, `peft`, `bitsandbytes`, `wandb`.
 
-- peft: A package for efficient fine-tuning techniques.
-- transformers: Provides easy-to-use interfaces to Llama models.
-- datasets: For loading and handling datasets.
-- bitsandbytes: Enables efficient model quantization and training.
-- trl: Tools for Supervised Fine-Tuning (SFT) of language models.
-- accelerate: Simplifies running training scripts on multi-GPU setups.
-- wandb: For experiment tracking and visualization.
+### 3. DPO_llama (Contains Bugs)
+- **Objective**: Applying DPO to train the LLaMA 7B model with human preference data.
+- **Key Features**:
+  - **Model and Tokenizer Setup**: Loading and configuring the LLaMA 7B model and tokenizer.
+  - **Human Preference Data**: Loading and preprocessing a dataset of human preferences.
+  - **DPO Configuration**: Setting up a DPO trainer with the model, reference model, dataset, and tokenizer.
+  - **Comparative Testing**: Emphasis on comparing the base model with the fine-tuned model.
+- **Libraries Used**: `transformers`, `datasets`, `trl`, `peft`.
 
-To install dependencies, run:
-```
-!pip install -q -U peft transformers datasets bitsandbytes trl accelerate wandb
-```
+## Repository Structure
+- `FineTune_llama.ipynb`: Demonstrates fine-tuning of LLaMA 7B using LoRA and quantization.
+- `Fine_tune_Mistral_7b_with_DPO.ipynb`: Focuses on fine-tuning Mistral 7B using DPO.
+- `DPO_llama.ipynb`: Attempts to apply DPO to LLaMA 7B, currently with bugs.
 
-## Setting Up the Environment
+## How to Use
+- Each notebook is self-contained with detailed comments and explanations.
+- Ensure all dependencies are installed as specified in each notebook.
+- Notebooks can be run in environments like Google Colab for optimal performance.
 
-- Suppress warnings to keep the output clean.
-- Hugging Face authentication for accessing private datasets or models.
-
-## Loading the Base Model and Tokenizer
-
-- Llama-2-7b model and tokenizer are loaded using the `transformers` library.
-- Quantization config is set for memory efficiency.
-
-## Adding LoRA Adapters
-
-- LoRA adapters are added to the model to enable efficient fine-tuning.
-- Adapters target specific modules within the model.
-
-## Loading the Dataset
-
-- `ultrachat` dataset is used, which is specifically designed for chat-like data.
-
-## Training Configuration
-
-- Configurations include batch sizes, optimizer settings, learning rates, etc.
-- TrainingArguments from `transformers` are used to encapsulate these settings.
-
-## Formatting Function and SFTTrainer
-
-- A custom formatting function is defined for the dataset.
-- SFTTrainer from `trl` is used to handle training logistics.
-
-## Training the Model
-
-- The training process is initiated using the SFTTrainer.
-- Model checkpoints and logs are saved at specified intervals.
-
-## Testing Base vs Fine-Tuned Model
-
-- The performance of the base and fine-tuned models are compared using sample inputs.
-- This helps in understanding the impact of fine-tuning and adapters.
-
-## Loading the Saved Model
-
-- The fine-tuned model is loaded from Hugging Face's model hub.
-
-## Example Usage
-
-- Demonstration of how to use the fine-tuned model for generating responses.
-- Both base and fine-tuned versions are tested to showcase the differences.
-
-## Conclusion
-
-The project illustrates a comprehensive approach to fine-tuning a large language model for specific conversational tasks. The use of advanced techniques like LoRA and quantization demonstrates how to handle large models efficiently. The documentation covers all steps, from setup to training and testing, providing a clear guide for replicating or extending the work.
-
+## Contributing
+- Contributions to fix bugs, enhance the models, or improve the notebooks are welcome.
+- Please follow the standard pull request process for contributions.
